@@ -177,33 +177,32 @@
     </section>
     
 
-<!-- Products Section -->
-<section class="products py-5">
+<!-- Actions Section -->
+<section class="actions py-5">
     <div class="container">
-        <div class="row" id="productRow">
-            <!-- Products will be dynamically generated here -->
+        <div class="row" id="actionRow">
+            <!-- Actions will be dynamically generated here -->
         </div>
     </div>
 </section>
 
-<!-- Product Modals -->
+<!-- Action Modals -->
 <!-- DO NOT MODIFY! If you are trying to update the content inside the modals, go to script.js -->
 <!-- the Javascript dynamically populates the modal information -->
-
-
-<!-- Product Modals -->
-<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+<!-- Action Modals -->
+<div class="modal fade" id="actionModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="productModalLabel"></h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="actionModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="" alt="Product Image" class="img-fluid mb-3">
-                <p class="modal-description"></p>
+                <div class="text-center">
+                    <img src="" alt="" class="modal-image img-fluid">
+                </div>
+                <div class="modal-description"></div>
+                <div class="action-content"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -211,8 +210,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 

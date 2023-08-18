@@ -1,75 +1,175 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    //Load Product or Event Data
-    const products = [
-        { id: 1, name: "Rolex Submariner", image: "rolex-submariner.avif", description: "The Rolex Submariner is a legendary dive watch known for its durability and precision. It features a ceramic bezel, self-winding movement, and water resistance up to 300 meters. A true classic." },
-        { id: 2, name: "Rolex Datejust", image: "rolex-datejust.avif", description: "The Rolex Datejust is a classic timepiece known for its elegant design and timeless style. It features a date window, automatic movement, and a variety of dial and bracelet options." },
-        { id: 3, name: "Rolex GMT-Master II", image: "rolex-gmt-master-ii.avif", description: "The Rolex GMT-Master II is a travel-friendly watch with a dual time zone function. It's a favorite among frequent travelers and features a distinctive ceramic bezel." },
-        { id: 4, name: "Rolex Day-Date", image: "rolex-day-date.avif", description: "The Rolex Day-Date, also known as the \"President\" watch, is a symbol of prestige and luxury. It features both the day and date displays, along with an automatic movement and exquisite design." },
-        { id: 5, name: "Rolex Daytona", image: "rolex-daytona.avif", description: "The Rolex Daytona is a legendary chronograph watch known for its association with motorsports. It features a tachymeter bezel and precise movement, making it a favorite among racing enthusiasts." },
-        { id: 6, name: "Rolex 1908", image: "rolex-1908.avif", description: "The Rolex 1908 is a classic timepiece that pays homage to the brand's rich history. With its elegant design and refined details, this watch captures the essence of timeless luxury." }
+    // Configure the Event and Properties of the Actions Events
+    const actions = [
+        {
+            title: "Action 1",
+            image: "action-1.avif",
+            description: "Description for Action 1",
+            properties: [
+                { name: "Property 1", value: "Value 1" },
+                { name: "Property 2", value: "Value 2" }
+            ]
+        },
+        {
+            title: "Action 2",
+            image: "action-2.avif",
+            description: "Description for Action 2",
+            properties: [
+                { name: "Property 1", value: "Value 1" },
+                { name: "Property 2", value: "Value 2" },
+                { name: "Property 3", value: true }
+            ]
+        },
+        {
+            title: "Action 3",
+            image: "action-3.avif",
+            description: "Description for Action 3",
+            properties: [
+                { name: "Property 1", value: "Value 1" }
+            ]
+        },
+        {
+            title: "Action 4",
+            image: "action-4.avif",
+            description: "Description for Action 4",
+            properties: [
+                { name: "Property 1", value: "Value 1" },
+                { name: "Property 2", value: "Option 1" }
+            ]
+        },
+        {
+            title: "Action 5",
+            image: "action-5.avif",
+            description: "Description for Action 5",
+            properties: []
+        },
+        {
+            title: "Action 6",
+            image: "action-6.avif",
+            description: "Description for Action 6",
+            properties: [
+                { name: "Property 1", value: "Value 1" },
+                { name: "Property 2", value: "Value 2" },
+                { name: "Property 3", value: "Value 3" }
+            ]
+        }
     ];
+    
+    
+    const modalForm = document.querySelector('#actionModal .action-content');
 
-    function getProductInfo(productId) {
-        return products.find(product => product.id === parseInt(productId));
+    
+    function getActionInfo(actionId) {
+        return actions.find(action => actionId === parseInt(action.id));
     }
 
-    //Create the product cards based off of the data provided
-    function generateProductCard(product) {
-        const productCard = document.createElement('div');
-        productCard.classList.add('col-md-4');
-
-        productCard.innerHTML = `
+    //Create Action Cards on the main page
+    function generateActionCard(action, index) {
+        const actionCard = document.createElement('div');
+        actionCard.classList.add('col-md-4');
+    
+        actionCard.innerHTML = `
             <div class="card mb-4">
                 <div class="card-body text-center">
-                    <h2>${product.name}</h2>
-                    <p>${product.description}</p>
-                    <a href="#" class="btn btn-primary btn-learn-more" data-product-id="${product.id}"
-                        data-bs-toggle="modal" data-bs-target="#productModal">Learn More</a>
+                    <h2>${action.title}</h2>
+                    <p>${action.description}</p>
+                    <a href="#" class="btn btn-primary btn-learn-more" data-action-id="${index}"
+                        data-bs-toggle="modal" data-bs-target="#actionModal">Learn More</a>
                 </div>
             </div>
         `;
-
-        return productCard;
-    }
-
-    function generateProductCards() {
-        const productRow = document.getElementById('productRow');
-        products.forEach(product => {
-            const productCard = generateProductCard(product);
-            productRow.appendChild(productCard);
+    
+        return actionCard;
+    }    
+    
+    function generateActionCards() {
+        const actionRow = document.getElementById('actionRow');
+        actions.forEach((action, index) => { // Pass index here
+            const actionCard = generateActionCard(action, index); // Pass both action and index
+            actionRow.appendChild(actionCard);
         });
     }
+    
+    generateActionCards();
 
-    generateProductCards();
 
-
-    //PRODUCT -LEARN MORE- MODAL FUNCTIONALITY
+    // ACTION -LEARN MORE- MODAL FUNCTIONALITY
     const modalTriggerButtons = document.querySelectorAll('.btn-learn-more');
-    const modalTitle = document.getElementById('productModalLabel');
-    const modalImage = document.querySelector('.modal-body img');
-    const modalDescription = document.querySelector('.modal-body p.modal-description');
+    const modalTitle = document.getElementById('actionModalLabel');
+    const modalImage = document.querySelector('.modal-body .modal-image');
+    const modalDescription = document.querySelector('.modal-body .modal-description');
+    const actionUsModal = new bootstrap.Modal(document.getElementById('actionModal'));
 
     modalTriggerButtons.forEach(button => {
         button.addEventListener('click', function () {
-            const productId = button.getAttribute('data-product-id');
-            const productInfo = getProductInfo(productId);
-
-            modalTitle.textContent = productInfo.name;
-            modalImage.src = productInfo.image;
-            modalImage.alt = productInfo.name;
-            modalDescription.textContent = productInfo.description;
-
-            //Segment Track Event for viewing Modals
-            analytics.track('Product Viewed', {
-                product: productInfo.name,
-                description: productInfo.description
-            });
+            const actionIndex = parseInt(button.getAttribute('data-action-id')); // Get the index
+            const actionInfo = actions[actionIndex]; // Use the index to retrieve the action
+    
+            generateActionModalContent(actionInfo);
+    
+            // Open the action modal
+            actionUsModal.show();
         });
     });
     
+
+    // Action MODAL Functionality
+    function generateActionModalContent(action) {
+        modalTitle.textContent = action.title;
+        modalImage.src = action.image;
+        modalImage.alt = action.title;
+        modalDescription.textContent = action.description;
+    
+        const modalForm = document.querySelector('#actionModal .action-content');
+    
+        modalForm.innerHTML = ''; // Clear previous fields
+    
+        if (action.properties.length > 0) {
+            const propertiesContainer = document.createElement('div');
+            propertiesContainer.classList.add('mt-4'); // Add margin-top for separation
+    
+            action.properties.forEach(property => {
+                const propertyRow = document.createElement('div');
+                propertyRow.classList.add('row', 'mb-3', 'align-items-center'); // Add align-items-center and adjust margin
+            
+                const propertyNameCol = document.createElement('div');
+                propertyNameCol.classList.add('col-md-4', 'fw-bold', 'text-end'); // Left-justify the label
+            
+                const propertyName = document.createElement('span');
+                propertyName.textContent = property.name;
+            
+                propertyNameCol.appendChild(propertyName);
+            
+                const propertyValueCol = document.createElement('div');
+                propertyValueCol.classList.add('col-md-8'); // Use the rest of the space
+            
+                const propertyValueInput = document.createElement('input');
+                propertyValueInput.type = property.type;
+                propertyValueInput.id = property.id;
+                propertyValueInput.value = property.value;
+                propertyValueInput.classList.add('form-control'); // Apply Bootstrap styling
+            
+                propertyValueCol.appendChild(propertyValueInput);
+            
+                propertyRow.appendChild(propertyNameCol);
+                propertyRow.appendChild(propertyValueCol);
+            
+                propertiesContainer.appendChild(propertyRow);
+            });            
+    
+            modalForm.appendChild(propertiesContainer);
+        } else {
+            const noPropertiesMessage = document.createElement('p');
+            noPropertiesMessage.textContent = 'No properties available.';
+            modalForm.appendChild(noPropertiesMessage);
+        }
+    }
+    
     // CONTACT US Submit Button functionality
     const contactForm = document.getElementById('contactForm');
+    const contactUsModal = new bootstrap.Modal(document.getElementById('contactUsModal'));
+
 
     contactForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -96,10 +196,10 @@ document.addEventListener('DOMContentLoaded', function () {
             email: email
         });
 
-        // Close the modal by getting the modal element and calling hide()
-        const contactUsModal = document.getElementById('contactUsModal');
-        const bootstrapModal = new bootstrap.Modal(contactUsModal);
-        bootstrapModal.hide();
+        // Close the modal using the Bootstrap modal method
+        console.log("Before hiding modal");
+        this.submit();
+        console.log("After hiding modal");
     });
 
         
