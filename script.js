@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const loggedInKey = 'loggedIn';
+    const loggedIn = localStorage.getItem(loggedInKey) === 'true';
 
     // Configure the Event and Properties of the Actions Events
     const actions = [
@@ -226,6 +228,81 @@ document.addEventListener('DOMContentLoaded', function () {
             email: email
         });
     });
+
+
+    // ~~~~~~~~ LOGIN AND LOGOUT FUNCTIONALITY~~~~~~~~~~~~~~~~>
+
+    // Add Login Functionality
+    document.querySelector('#loginModal form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const userEmail = document.getElementById('login-email').value;
+
+        // Identify the user using the email address as the ID
+        analytics.identify(userEmail, {
+            email: userEmail
+        });
+
+        // Track the "User Logged In" event
+        analytics.track('User Logged In', {
+            email: userEmail
+        });
+
+
+        // Set user as logged in and update button states
+        localStorage.setItem(loggedInKey, 'true');
+        updateButtonStates();
+    });
+
+    // Add Logout Functionality
+    document.getElementById('logoutButton').addEventListener('click', function () {
+        // You can also track a "User Logged Out" event if needed
+        analytics.track('User Logged Out');
+
+        // Clear user information
+        analytics.reset();
+
+        // Set user as logged out and update button states
+        localStorage.setItem(loggedInKey, 'false');
+        updateButtonStates();
+    });
+
+    // Update button states based on login status
+    function updateButtonStates() {
+        const loggedIn = localStorage.getItem(loggedInKey) === 'true';
+        const loginButton = document.getElementById('loginButton');
+        const logoutButton = document.getElementById('logoutButton');
+        
+        if (loggedIn) {
+            loginButton.setAttribute('disabled', 'true');
+            logoutButton.removeAttribute('disabled');
+        } else {
+            loginButton.removeAttribute('disabled');
+            logoutButton.setAttribute('disabled', 'true');
+        }
+    }
+
+    // Initial update of button states
+    updateButtonStates();
+
+
+    // ~~~~~~~~ HEADER NAVIGATION LINK PAGE CALLS~~~~~~~~~~~~~~~~>
+    document.getElementById('homeLink').addEventListener('click', function () {
+        analytics.page("Home"); // Track a page view for the "Home" link
+    });
+
+    document.getElementById('servicesLink').addEventListener('click', function () {
+        analytics.page("Services"); // Track a page view for the "Services" link
+    });
+
+    document.getElementById('solutionsLink').addEventListener('click', function () {
+        analytics.page("Solutions"); // Track a page view for the "Solutions" link
+    });
+
+    document.getElementById('contactLink').addEventListener('click', function () {
+        analytics.page("Contact"); // Track a page view for the "Contact" link
+    });
+
 
         
 });

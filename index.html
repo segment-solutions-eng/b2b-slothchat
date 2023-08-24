@@ -18,7 +18,7 @@
     <script>
         !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){if(window.analytics.initialized)return window.analytics[e].apply(window.analytics,arguments);var i=Array.prototype.slice.call(arguments);i.unshift(e);analytics.push(i);return analytics}};for(var i=0;i<analytics.methods.length;i++){var key=analytics.methods[i];analytics[key]=analytics.factory(key)}analytics.load=function(key,i){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=i};analytics._writeKey="E012wyk1DUywYPZuDXpVuNHBAK2yKi4s";;analytics.SNIPPET_VERSION="4.16.1";
         analytics.load("E012wyk1DUywYPZuDXpVuNHBAK2yKi4s");
-        analytics.page();
+        analytics.page("Home");
         }}();
       </script>
 
@@ -35,22 +35,22 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home</a>
+                            <a id="homeLink" class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
+                            <a id="servicesLink" class="nav-link" href="#">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Solutions</a>
+                            <a id="solutionsLink" class="nav-link" href="#">Solutions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a id="contactLink" class="nav-link" href="#">Contact</a>
                         </li>
                     </ul>
                 </div>
                 <div style="position:absolute; top: 0; right: 0; padding: 10px;" class="user-menu">
-                    <button class="btn btn-primary open-modal-button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                    <button class="btn btn-secondary logout-button">Logout</button>
+                    <button id="loginButton" class="btn btn-primary open-modal-button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    <button id="logoutButton" class="btn btn-secondary logout-button" disabled>Logout</button>
                 </div>                
             </div>
         </nav>
@@ -139,7 +139,7 @@
                             <input type="checkbox" class="form-check-input" id="remember">
                             <label class="form-check-label" for="remember">Remember me</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Login</button>
                     </form>
                 </div>
             </div>
@@ -199,7 +199,7 @@
 <!-- the Javascript dynamically populates the modal information -->
 <!-- Action Modals -->
 <div class="modal fade" id="actionModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="actionModalLabel"></h5>
@@ -207,7 +207,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <img src="" alt="" class="modal-image img-fluid">
+                    <img src="" alt="" class="modal-image img-fluid" style="max-width: 300px;">
                 </div>
                 <div class="modal-description"></div>
                 <div class="action-content"></div>
