@@ -118,6 +118,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    //Normalize The Property Name to adhere to JSON
+    function normalizePropertyName(propertyName) {
+        // Remove spaces and replace special characters with underscores,
+        // and convert to lowercase
+        return propertyName.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '').toLowerCase();
+      }
+
     // Add a click event listener to the Segment button outside the modal's shown.bs.modal event
     segmentButton.addEventListener('click', function () {
         // Get the action info
@@ -128,17 +135,20 @@ document.addEventListener('DOMContentLoaded', function () {
         const dynamicProperties = {};
         const propertyInputs = document.querySelectorAll('#actionModal input.form-control');
         propertyInputs.forEach(input => {
-            const propertyName = input.getAttribute('data-property-name'); // Get property name from data attribute
+            const propertyName = normalizePropertyName(input.getAttribute('data-property-name')); // Normalize property name
             const propertyValue = input.value;
             dynamicProperties[propertyName] = propertyValue;
         });
 
-        // Track the event using Segment with dynamic properties
-        analytics.track('Action Clicked', {
-            actionTitle: actionInfo.title,
-            actionDescription: actionInfo.description,
+        // Create the track event object with computed property names
+        const trackEvent = {
+            title: actionInfo.title,
+            description: actionInfo.description,
             ...dynamicProperties // Spread the dynamic properties into the event payload
-        });
+    };
+
+        // Track the event using Segment with the computed property names
+        analytics.track(actionInfo.title, trackEvent);
     });
 
 
