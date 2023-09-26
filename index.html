@@ -218,39 +218,21 @@
                 <div class="modal-description" id="actionModalDescription" contenteditable="true"></div>
                 <div class="action-content"></div>
                 
-                <!-- something is going on here -->
-                <!-- Start HERE -->
-                <!-- <div class="d-inline-flex gap-1">
-                    <a class="text-decoration-none collapsed" data-bs-toggle="collapse" href="#seeAdvancedDetails" role="button" aria-expanded="false" aria-controls="seeAdvancedDetails">
-                        See behind the scenes
-                    </a>
-                    <div class="collapse mt-3" id="seeAdvancedDetails">
-                        <div class="card card-body">
-                            Content of the generated track call will be displayed here -->
-                            <!-- Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- Code Block Stuff -->
+                <!-- Show Details Button -->
                 <div class="d-flex justify-content-start mt-3">
-                    <div class="code-block-section border rounded p-2 bg-light" style="width:100%">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#codeBlockDetails" aria-expanded="false" aria-controls="codeBlockDetails">
+                        Show Details
+                    </button>
+                </div>
+
+                <!-- Code Block Section -->
+                <div class="collapse" id="codeBlockDetails">
+                    <div class="code-block-section border rounded p-2 bg-light" style="width: 100%;">
                         <h6 class="code-block-title">Code Block</h6>
                         <pre id="liveCodeBlock" class="p-2 bg-dark text-light m-0"><code class="language-javascript"></code></pre>
-
-                        <!-- <pre id="liveCodeBlock">
-                            <code class="language-javascript">
-                                analytics.track("Test Event",{
-                                    property1 = "testing",
-                                    property2 = 47
-                                });
-                            </code>
-                        </pre> -->
-
                     </div>
                 </div>
                 
-            
             </div>
             <div class="modal-footer">
                 <button id="segmentButton" type="button" class="btn btn-primary" data-bs-dismiss="modal">Send Event</button>
@@ -259,6 +241,7 @@
         </div>
     </div>
 </div>
+
 
 
 

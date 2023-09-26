@@ -8,15 +8,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.getElementById('servicesLink').addEventListener('click', function () {
-        analytics.page("Savings"); // Track a page view for the "Services" link
+        analytics.page("Services"); // Track a page view for the "Services" link
     });
 
     document.getElementById('solutionsLink').addEventListener('click', function () {
-        analytics.page("Investments"); // Track a page view for the "Solutions" link
+        analytics.page("Solutions"); // Track a page view for the "Solutions" link
     });
 
     document.getElementById('contactLink').addEventListener('click', function () {
-        analytics.page("Crypto"); // Track a page view for the "Contact" link
+        analytics.page("Contact"); // Track a page view for the "Contact" link
     });
 
 
@@ -381,6 +381,25 @@ document.addEventListener('DOMContentLoaded', function () {
         liveCodeContent.textContent = `analytics.track('${updatedTrackEvent.title}', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
     
     }
+
+
+// JavaScript to handle the "Show Details" button click event
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("trying to handle the show details button");
+    var showDetailsButton = document.querySelector('[data-bs-target="#codeBlockDetails"]');
+    
+    // Check if the button exists (in case it's not on all pages)
+    if (showDetailsButton) {
+        showDetailsButton.addEventListener('click', function () {
+            var codeBlockDetails = document.querySelector('#codeBlockDetails');
+            
+            // Toggle the collapse state of the code block section
+            var bsCollapse = new bootstrap.Collapse(codeBlockDetails);
+        });
+    }
+});
+
+
     
         
 });
