@@ -23,18 +23,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Configure the Event and Properties of the Actions Events
     const actions = [
         {
-            title: "Action 1",
+            title: "Open Account",
             image: "action-1.avif",
-            description: "Description for Action 1",
+            description: "Sign up for a new online financial account, provide personal information, and set up login credentials to access financial services.",
             properties: [
                 { name: "Property 1", value: "Value 1" },
                 { name: "Property 2", value: "Value 2" }
             ]
         },
         {
-            title: "Action 2",
+            title: "Transfer Funds",
             image: "action-2.avif",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+            description: "Initiate the movement of funds between different financial accounts, whether within the same institution or to external accounts at other banks.",
             properties: [
                 { name: "Property 1", value: "Value 1" },
                 { name: "Property 2", value: "Value 2" },
@@ -42,32 +42,32 @@ document.addEventListener('DOMContentLoaded', function () {
             ]
         },
         {
-            title: "Action 3",
+            title: "Purchase Crypto",
             image: "action-3.avif",
-            description: "Description for Action 3",
+            description: "Buy digital currencies like Bitcoin, Ethereum, and more through our secure platform.",
             properties: [
                 { name: "Property 1", value: "Value 1" }
             ]
         },
         {
-            title: "Action 4",
+            title: "Manage Investments",
             image: "action-4.avif",
-            description: "Description for Action 4",
+            description: "Buy or sell various types of investments, such as stocks, bonds, or mutual funds, to actively manage or grow your investment portfolio.",
             properties: [
                 { name: "Property 1", value: "Value 1" },
                 { name: "Property 2", value: "Option 1" }
             ]
         },
         {
-            title: "Action 5",
+            title: "Pay Bills",
             image: "action-5.avif",
-            description: "Description for Action 5",
+            description: "Make payments for bills, loans, or recurring expenses through your financial account, often with the option to set up automated payments for convenience.",
             properties: []
         },
         {
-            title: "Action 6",
+            title: "Request Customer Support",
             image: "action-6.avif",
-            description: "Description for Action 6",
+            description: "Contact the customer support to seek assistance with account-related issues, resolve problems, or ask questions regarding products and services.",
             properties: [
                 { name: "Property 1", value: "Value 1" },
                 { name: "Property 2", value: "Value 2" },
@@ -90,10 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
         actionCard.classList.add('col-md-4', 'mb-4');
     
         actionCard.innerHTML = `
-            <div class="card mb-4 h-100">
-                <div class="card-body d-flex flex-column align-items-stretch h-100">
+            <div class="card mb-4 h-100 d-flex flex-column justify-content-between">
+                <div class="card-body">
                     <h2>${action.title}</h2>
                     <p>${action.description}</p>
+                </div>
+                <div class="card-footer text-center">
                     <a href="#" class="btn btn-primary btn-learn-more" data-action-id="${index}"
                         data-bs-toggle="modal" data-bs-target="#actionModal">Learn More</a>
                 </div>
@@ -101,7 +103,9 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     
         return actionCard;
-    }    
+    }
+    
+      
     
     function generateActionCards() {
         const actionRow = document.getElementById('actionRow');
