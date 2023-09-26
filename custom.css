@@ -34,3 +34,8 @@
     font-size: 1.1rem;
     color: #555; /* Subdued text color */
 }
+
+.feature-image {
+    width: 100%;     /* Make the image span full width of the card */
+    height: auto;    /* Maintain aspect ratio */
+}
