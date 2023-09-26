@@ -369,12 +369,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const liveCodeContent = liveCodeBlock.querySelector('code');
         liveCodeContent.textContent = `analytics.track('${updatedTrackEvent.title}', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
     
-        // // Trigger Prism syntax highlighting
+        // // Trigger highlight.js syntax highlighting
          hljs.highlightElement(liveCodeContent);
          console.log("attempting to highlight using HLS");
 
         // Update the content of the live code preview
-        liveCodeBlock.textContent = `analytics.track('${updatedTrackEvent.title}', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
+        liveCodeContent.textContent = `analytics.track('${updatedTrackEvent.title}', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
     
     }
     
