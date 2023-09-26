@@ -370,7 +370,8 @@ document.addEventListener('DOMContentLoaded', function () {
         liveCodeContent.textContent = `analytics.track('${updatedTrackEvent.title}', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
     
         // // Trigger Prism syntax highlighting
-         Prism.highlightElement(liveCodeContent);
+         hljs.highlightElement(liveCodeContent);
+         console.log("attempting to highlight using HLS");
 
         // Update the content of the live code preview
         liveCodeBlock.textContent = `analytics.track('${updatedTrackEvent.title}', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
