@@ -12,6 +12,15 @@
     <!-- Link to Bootstrap JS and related dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Include Prism -->
+    <!-- Prism CSS (Core) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism@1.24.1/themes/prism.min.css">
+    <!-- Prism JavaScript (Core) -->
+    <script src="https://cdn.jsdelivr.net/npm/prism@1.24.1/prism.min.js"></script>
+    <!-- Okaidia Theme CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism@1.24.1/themes/prism-okaidia.min.css">
+
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="custom.css">
 
@@ -203,31 +212,39 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="actionModalLabel"></h5>
+                <h5 class="modal-title larger-text fw-bold" id="actionModalLabel" contenteditable="true"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="text-center">
                     <img src="" alt="" class="modal-image img-fluid" style="max-width: 300px;">
                 </div>
-                <div class="modal-description"></div>
+                <div class="modal-description" id="actionModalDescription" contenteditable="true"></div>
                 <div class="action-content"></div>
                 
                 <!-- something is going on here -->
                 <!-- Start HERE -->
-                <div class="d-inline-flex gap-1">
+                <!-- <div class="d-inline-flex gap-1">
                     <a class="text-decoration-none collapsed" data-bs-toggle="collapse" href="#seeAdvancedDetails" role="button" aria-expanded="false" aria-controls="seeAdvancedDetails">
                         See behind the scenes
                     </a>
                     <div class="collapse mt-3" id="seeAdvancedDetails">
                         <div class="card card-body">
-                            <!-- Content of the generated track call will be displayed here -->
-                            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                            Content of the generated track call will be displayed here -->
+                            <!-- Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
                         </div>
                     </div>
-                </div>
-                                
+                </div> -->
 
+                <!-- Code Block Stuff -->
+                <div class="d-flex justify-content-start mt-3">
+                    <div class="code-block-section border rounded p-2 bg-light">
+                        <h6 class="code-block-title">Code Block</h6>
+                        <pre id="liveCodeBlock" class="p-2 bg-dark text-light m-0"><code class="language-json"></code></pre>
+                    </div>
+                </div>
+                
+            
             </div>
             <div class="modal-footer">
                 <button id="segmentButton" type="button" class="btn btn-primary" data-bs-dismiss="modal">Send Event</button>
@@ -251,6 +268,7 @@
 
     <!-- Custom JS -->
     <script src="script.js"></script>
+
 
 </body>
 </html>

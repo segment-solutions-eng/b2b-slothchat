@@ -2,6 +2,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const loggedInKey = 'loggedIn';
     const loggedIn = localStorage.getItem(loggedInKey) === 'true';
 
+    // ~~~~~~~~ HEADER NAVIGATION LINK PAGE CALLS~~~~~~~~~~~~~~~~>
+    document.getElementById('homeLink').addEventListener('click', function () {
+        analytics.page("Home"); // Track a page view for the "Home" link
+    });
+
+    document.getElementById('servicesLink').addEventListener('click', function () {
+        analytics.page("Services"); // Track a page view for the "Services" link
+    });
+
+    document.getElementById('solutionsLink').addEventListener('click', function () {
+        analytics.page("Solutions"); // Track a page view for the "Solutions" link
+    });
+
+    document.getElementById('contactLink').addEventListener('click', function () {
+        analytics.page("Contact"); // Track a page view for the "Contact" link
+    });
+
+
     // Configure the Event and Properties of the Actions Events
     const actions = [
         {
@@ -204,6 +222,24 @@ document.addEventListener('DOMContentLoaded', function () {
             noPropertiesMessage.textContent = 'No properties available.';
             modalForm.appendChild(noPropertiesMessage);
         }
+
+        // Add a change event listener to the title input
+        const titleInput = document.getElementById('actionModalLabel');
+        titleInput.addEventListener('change', updateLiveCodePreview);
+
+        // Add a change event listener to the description input
+        const descriptionInput = document.getElementById('actionModalDescription');
+        descriptionInput.addEventListener('change', updateLiveCodePreview);
+
+        // Add a change event listenter to each key value input
+        //const dynamicProperties = {};
+        const propertyInputs = document.querySelectorAll('#actionModal input.form-control');
+        propertyInputs.forEach(input => {
+            input.addEventListener('change', updateLiveCodePreview);
+        });
+
+        //run the code Preview for the first time
+        updateLiveCodePreview();
     }
 
 
@@ -296,23 +332,50 @@ document.addEventListener('DOMContentLoaded', function () {
     updateButtonStates();
 
 
-    // ~~~~~~~~ HEADER NAVIGATION LINK PAGE CALLS~~~~~~~~~~~~~~~~>
-    document.getElementById('homeLink').addEventListener('click', function () {
-        analytics.page("Home"); // Track a page view for the "Home" link
-    });
+    // ~~~~~~~~~~~~~Live Code Preview Functionality ~~~~~~~~~~~~~
+    // // Add a change event listener to the title input
+    // const titleInput = document.getElementById('actionModalLabel');
+    // titleInput.addEventListener('change', updateLiveCodePreview);
 
-    document.getElementById('servicesLink').addEventListener('click', function () {
-        analytics.page("Services"); // Track a page view for the "Services" link
-    });
+    // // Add a change event listener to the description input
+    // const descriptionInput = document.getElementById('actionModalDescription');
+    // descriptionInput.addEventListener('change', updateLiveCodePreview);
 
-    document.getElementById('solutionsLink').addEventListener('click', function () {
-        analytics.page("Solutions"); // Track a page view for the "Solutions" link
-    });
+    // Add change event listeners to the dynamic property inputs
+    // propertyInputs.forEach(input => {
+    //     input.addEventListener('change', updateLiveCodePreview);
+    // });
 
-    document.getElementById('contactLink').addEventListener('click', function () {
-        analytics.page("Contact"); // Track a page view for the "Contact" link
-    });
+    // Function to update the live code preview
+    function updateLiveCodePreview() {
+        const liveCodeBlock = document.getElementById('liveCodeBlock');
+        const titleElement = document.getElementById('actionModalLabel');
+        const descriptionElement = document.getElementById('actionModalDescription');
+        
+        const dynamicProperties = {};
+        const propertyInputs = document.querySelectorAll('#actionModal input.form-control');
+        propertyInputs.forEach(input => {
+            const propertyName = normalizePropertyName(input.getAttribute('data-property-name'));
+            const propertyValue = input.value;
+            dynamicProperties[propertyName] = propertyValue;
+        });
+    
+        const updatedTrackEvent = {
+            title: titleElement.textContent, // Use textContent instead of value
+            description: descriptionElement.textContent, // Use textContent instead of value
+            ...dynamicProperties
+        };
+    
+        const liveCodeContent = liveCodeBlock.querySelector('code');
+        liveCodeContent.textContent = `analytics.track('${updatedTrackEvent.title}', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
+    
+        // // Trigger Prism syntax highlighting
+         Prism.highlightElement(liveCodeContent);
 
-
+        // Update the content of the live code preview
+        liveCodeBlock.textContent = `analytics.track('${updatedTrackEvent.title}', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
+    
+    }
+    
         
 });
