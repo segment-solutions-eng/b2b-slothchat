@@ -12,18 +12,11 @@
     />
     <!-- <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">  -->
 
-    <!-- Link to Bootstrap JS and related dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- Include Highlight -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/a11y-dark.min.css"
     />
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js"></script>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="custom.css" />
 
     <!-- Load AJS -->
     <script>
@@ -91,6 +84,9 @@
           }
       })();
     </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="custom.css" />
   </head>
   <body>
     <header class="bg-light">
@@ -152,7 +148,7 @@
     <section
       class="hero text-white text-center py-5"
       style="
-        background-image: url('banner2.png');
+        background-image: url('./assets/banner2.png');
         background-size: cover;
         background-position: center;
       "
@@ -341,7 +337,7 @@
                 <!-- <div class="feature-icon">🎯</div> -->
                 <h2 class="feature-title">Personalized Financial Planning</h2>
                 <img
-                  src="appointment-advice.jpg"
+                  src="./assets/appointment-advice.jpg"
                   alt="Feature Image"
                   class="feature-image"
                 />
@@ -363,7 +359,7 @@
                   Secure and Diverse Investment Options
                 </h2>
                 <img
-                  src="register-account.jpg"
+                  src="./assets/register-account.jpg"
                   alt="Feature Image"
                   class="feature-image"
                 />
@@ -486,10 +482,14 @@
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js"></script>
+
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JS -->
+    <script src="constants.js"></script>
+    <script src="helpers.js"></script>
     <script src="script.js"></script>
 
     <!-- Use Highlight (For Code highlighting) -->
