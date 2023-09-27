@@ -44,18 +44,25 @@ function getDynamicProperties() {
     "#actionModal input.form-control"
   );
   const propertyNames = document.querySelectorAll(
-    "actionModal col-md-4 fw-bold text-end"
+    ".seg-property-name"
   );
-
-  //debugger;
   
-  propertyInputs.forEach((input) => {
-    const propertyName = normalizePropertyName(
-      input.getAttribute("data-property-name")
-    );
+  for (let i = 0; i < propertyInputs.length; i++) {
+    const input = propertyInputs[i];
     const propertyValue = input.value;
-    dynamicProperties[propertyName] = propertyValue;
-  });
+    const propName = normalizePropertyName(propertyNames[i].textContent); 
+    dynamicProperties[propName] = propertyValue;
+    //console.log(propName + ", " + propertyValue);
+  }
+
+
+  // propertyInputs.forEach((input) => {
+  //   const propertyName = normalizePropertyName(
+  //     input.getAttribute("data-property-name")
+  //   );
+  //   const propertyValue = input.value;
+  //   dynamicProperties[propertyName] = propertyValue;
+  // });
 
   return dynamicProperties;
 }
@@ -79,7 +86,6 @@ function updateLiveCodePreview() {
 
   // Trigger highlight.js syntax highlighting
   hljs.highlightElement(liveCodeContent);
-  console.log("attempting to highlight using HLS");
 }
 
 function addLiveCodePreviewTriggers() {
@@ -119,6 +125,7 @@ function generatePropertyRow(property) {
   propertyNameCol.contentEditable = "true"; // Editable Property Name
 
   const propertyName = document.createElement("span");
+  propertyName.classList.add("seg-property-name"); //<<<<<<<<<<<<-added this to test>>>>>
   propertyName.textContent = property.name;
 
   propertyNameCol.appendChild(propertyName);
