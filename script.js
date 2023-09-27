@@ -164,6 +164,7 @@ function generateActionModalContent(action) {
 
 // ACTION -LEARN MORE- MODAL FUNCTIONALITY
 function addModalTriggerListeners() {
+  const actionUsModal = new bootstrap.Modal(getElById("actionModal"));
   const modalTriggerButtons = document.querySelectorAll(".btn-learn-more");
   modalTriggerButtons.forEach((button) => {
     button.addEventListener("click", function () {
@@ -171,8 +172,6 @@ function addModalTriggerListeners() {
       const actionInfo = ACTIONS[actionIndex];
       generateActionModalContent(actionInfo);
 
-      // Open the action modal
-      const actionUsModal = new bootstrap.Modal(getElById("actionModal"));
       actionUsModal.show();
 
       // Set the action index for the Segment button
