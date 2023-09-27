@@ -1,3 +1,4 @@
+// Add Listeners for header navigation clicks to then create Page calls
 function addHeaderNavClickListeners() {
   HEADER_NAV_CONFIG.forEach((navItem) =>
     document
@@ -6,6 +7,7 @@ function addHeaderNavClickListeners() {
   );
 }
 
+// Create an Action Card
 function generateActionCard(action, index) {
   const actionCard = document.createElement("div");
   actionCard.classList.add("col-md-4", "mb-4");
@@ -26,6 +28,7 @@ function generateActionCard(action, index) {
   return actionCard;
 }
 
+// Initiate creating the 6 Action Cards that are on the main page bottom section 
 function generateActionCards() {
   const actionRow = getElById("actionRow");
   ACTIONS.forEach((action, index) => {
@@ -34,6 +37,7 @@ function generateActionCards() {
   });
 }
 
+// Within an Action Modal, get the dynamic created properties for your track events
 function getDynamicProperties() {
   const dynamicProperties = {};
   const propertyInputs = document.querySelectorAll(
@@ -70,11 +74,6 @@ function updateLiveCodePreview() {
   // Trigger highlight.js syntax highlighting
   hljs.highlightElement(liveCodeContent);
   console.log("attempting to highlight using HLS");
-
-  // // Update the content of the live code preview
-  // liveCodeContent.textContent = `analytics.track('${
-  //   updatedTrackEvent.title
-  // }', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
 }
 
 function addLiveCodePreviewTriggers() {
@@ -86,11 +85,20 @@ function addLiveCodePreviewTriggers() {
 
   // Add a change event listenter to each key value input
   const propertyInputs = document.querySelectorAll(
-    "#actionModal input.form-control"
+    "#actionModal input.form-control" 
   );
   propertyInputs.forEach((input) => {
     input.addEventListener("change", updateLiveCodePreview);
   });
+
+   // Add an input event listener to each property name field
+   const propertyNameInputs = document.querySelectorAll(
+    "#actionModal .col-md-4[contenteditable='true']"
+  );
+  propertyNameInputs.forEach((input) => {
+    input.addEventListener("input", updateLiveCodePreview);
+  });
+ 
 
   //run the code Preview for the first time
   updateLiveCodePreview();
@@ -102,6 +110,7 @@ function generatePropertyRow(property) {
 
   const propertyNameCol = document.createElement("div");
   propertyNameCol.classList.add("col-md-4", "fw-bold", "text-end"); // Left-justify the label
+  propertyNameCol.contentEditable = "true"; // Editable Property Name
 
   const propertyName = document.createElement("span");
   propertyName.textContent = property.name;
@@ -185,19 +194,24 @@ function addModalTriggerListeners() {
 function addSegmentBtnListener() {
   const segmentButton = getElById("segmentButton"); // Move it here
   segmentButton.addEventListener("click", () => {
+
+    // Get the Title and Description from the Modal
+    const titleInput = getElById("actionModalLabel");
+    const descriptionInput = getElById("actionModalDescription");
+    
     // Get the action info
     const actionIndex = parseInt(segmentButton.getAttribute("data-action-id"));
     const actionInfo = ACTIONS[actionIndex];
 
     // Create the track event object with computed property names
     const trackEvent = {
-      title: actionInfo.title,
-      description: actionInfo.description,
+      title: titleInput.textContent,
+      description: descriptionInput.textContent,
       ...getDynamicProperties(), // Spread the dynamic properties into the event payload
     };
 
     // Track the event using Segment with the computed property names
-    analytics.track(actionInfo.title, trackEvent);
+    analytics.track(titleInput.textContent, trackEvent);
   });
 }
 
