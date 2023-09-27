@@ -67,14 +67,14 @@ function updateLiveCodePreview() {
     updatedTrackEvent.title
   }', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
 
-  // // Trigger highlight.js syntax highlighting
+  // Trigger highlight.js syntax highlighting
   hljs.highlightElement(liveCodeContent);
   console.log("attempting to highlight using HLS");
 
-  // Update the content of the live code preview
-  liveCodeContent.textContent = `analytics.track('${
-    updatedTrackEvent.title
-  }', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
+  // // Update the content of the live code preview
+  // liveCodeContent.textContent = `analytics.track('${
+  //   updatedTrackEvent.title
+  // }', ${JSON.stringify(updatedTrackEvent, null, 2)});`;
 }
 
 function addLiveCodePreviewTriggers() {
