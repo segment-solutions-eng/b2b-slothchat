@@ -3,7 +3,7 @@ const LOGGED_IN_KEY = "loggedIn";
 const ACTIONS = [
   {
     title: "Open Account",
-    image: "./assets/action-1.avif",
+    image: "./assets/open-account.jpeg",
     description:
       "Sign up for a new online financial account, provide personal information, and set up login credentials to access financial services.",
     properties: [
@@ -13,7 +13,7 @@ const ACTIONS = [
   },
   {
     title: "Transfer Funds",
-    image: "./assets/action-2.avif",
+    image: "./assets/transfer-funds.jpeg",
     description:
       "Initiate the movement of funds between different financial accounts, whether within the same institution or to external accounts at other banks.",
     properties: [
@@ -24,14 +24,14 @@ const ACTIONS = [
   },
   {
     title: "Purchase Crypto",
-    image: "./assets/action-3.avif",
+    image: "./assets/purchase-crypto.jpeg",
     description:
       "Buy digital currencies like Bitcoin, Ethereum, and more through our secure platform.",
     properties: [{ name: "Property 1", value: "Value 1" }],
   },
   {
     title: "Manage Investments",
-    image: "./assets/action-4.avif",
+    image: "./assets/manage-investments.jpeg",
     description:
       "Buy or sell various types of investments, such as stocks, bonds, or mutual funds, to actively manage or grow your investment portfolio.",
     properties: [
@@ -41,14 +41,14 @@ const ACTIONS = [
   },
   {
     title: "Pay Bills",
-    image: "./assets/action-5.avif",
+    image: "./assets/pay-bills.jpeg",
     description:
       "Make payments for bills, loans, or recurring expenses through your financial account, often with the option to set up automated payments for convenience.",
     properties: [],
   },
   {
     title: "Request Customer Support",
-    image: "./assets/action-6.avif",
+    image: "./assets/customer-support.jpeg",
     description:
       "Contact the customer support to seek assistance with account-related issues, resolve problems, or ask questions regarding products and services.",
     properties: [

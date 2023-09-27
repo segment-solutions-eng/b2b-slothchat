@@ -43,6 +43,12 @@ function getDynamicProperties() {
   const propertyInputs = document.querySelectorAll(
     "#actionModal input.form-control"
   );
+  const propertyNames = document.querySelectorAll(
+    "actionModal col-md-4 fw-bold text-end"
+  );
+
+  //debugger;
+  
   propertyInputs.forEach((input) => {
     const propertyName = normalizePropertyName(
       input.getAttribute("data-property-name")
