@@ -2,14 +2,12 @@ const LOGGED_IN_KEY = "loggedIn";
 
 const ACTIONS = [
   {
-    title: "Open Account",
+    title: "Audio Call Started",
     image: "./assets/open-account.jpeg",
-    description: "Sign up for a new online financial account, provide personal information, and set up login credentials to access financial services.",
+    description: "Send an audio call to your coworker and quickly discuss a deal!",
     properties: [
-      { name: "Account Type", value: "Savings" },
-      { name: "Account Tier", value: "Basic" },
-      { name: "Initial Deposit Amount", value: "$1,000" },
-      { name: "Identification Documents", value: "Passport" }
+      { name: "platform", value: "Web" },
+      { name: "recipient", value: "@erwalters" }
     ]
   },
   {
